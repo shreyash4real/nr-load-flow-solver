@@ -1,0 +1,263 @@
+:root {
+  --font-sans: 'JetBrains Mono', 'Fira Code', 'SFMono-Regular', Consolas, monospace;
+  --font-math: 'Georgia', 'Cambria', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'SFMono-Regular', Consolas, monospace;
+
+  /* Retro CRT Grid Console Palette (High-Voltage Phosphor Green & Sodium Amber) */
+  --bg-drafting: #070a13;         /* Deep Space Black */
+  --bg-sheet: #0f1524;            /* Carbon Blue-Black */
+  --grid-cyan: rgba(74, 222, 128, 0.03); /* Phosphor grid lines */
+  
+  --text-ink: #4ade80;            /* Bright Phosphor Green */
+  --text-slate: #86efac;          /* Muted Green */
+  --text-light: #166534;          /* Dark Green */
+  
+  --accent-color: #fbbf24;        /* Sodium Vapor Amber */
+  --accent-green: #22c55e;         /* Phosphor Green Accent */
+  --accent-light: rgba(251, 191, 36, 0.1);
+
+  --bus-slack: #fbbf24;           /* Slack - Amber */
+  --bus-pv: #34d399;              /* PV - Emerald */
+  --bus-pq: #60a5fa;              /* PQ - Neon Blue */
+
+  --loss-red: #f43f5e;            /* Rose Alert Red */
+  
+  --border-ink: #22c55e;          /* Neon Green Border */
+  --border-slate: #14532d;        /* Dark Green Border */
+  --border-light: #1e293b;
+
+  background-color: var(--bg-drafting);
+  color: var(--text-ink);
+  font-family: var(--font-sans);
+  font-size: 13.5px;
+  line-height: 1.6;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-image: 
+    linear-gradient(var(--grid-cyan) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-cyan) 1px, transparent 1px);
+  background-size: 20px 20px;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* CRT Scanlines Overlay */
+body::after {
+  content: " ";
+  display: block;
+  position: fixed;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+  z-index: 99999;
+  background-size: 100% 4px, 6px 100%;
+  pointer-events: none;
+}
+
+/* Vignette Screen Glow */
+body::before {
+  content: " ";
+  display: block;
+  position: fixed;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background: radial-gradient(circle, transparent 55%, rgba(0,0,0,0.4) 100%);
+  z-index: 99998;
+  pointer-events: none;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Glow Effects */
+.glow-text {
+  text-shadow: 0 0 6px rgba(74, 222, 128, 0.6);
+}
+
+.glow-amber {
+  text-shadow: 0 0 6px rgba(251, 191, 36, 0.6);
+}
+
+.glow-box {
+  box-shadow: 0 0 10px rgba(34, 197, 94, 0.15);
+}
+
+/* Textbook/Console Typography */
+.textbook-title {
+  font-family: var(--font-mono);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.math-var {
+  font-family: var(--font-math);
+  font-style: italic;
+  font-weight: 500;
+  color: var(--accent-color);
+}
+
+.math-matrix {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-mono);
+  background-color: #080c14;
+  padding: 1rem;
+  border: 1px solid var(--border-slate);
+  border-radius: 4px;
+}
+
+.matrix-brackets {
+  font-family: var(--font-math);
+  font-size: 3rem;
+  font-weight: 100;
+  color: var(--accent-color);
+  user-select: none;
+  line-height: 1;
+}
+
+.matrix-grid {
+  display: grid;
+  gap: 2px;
+}
+
+/* Console Control Tables */
+.logbook-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.logbook-table th {
+  border-top: 1px solid var(--border-ink);
+  border-bottom: 2px solid var(--border-ink);
+  padding: 6px 10px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--accent-color);
+  letter-spacing: 0.05em;
+  background-color: rgba(34, 197, 94, 0.03);
+  text-align: left;
+}
+
+.logbook-table td {
+  border-bottom: 1px solid rgba(20, 83, 45, 0.4);
+  padding: 8px 10px;
+  font-family: var(--font-mono);
+  color: var(--text-slate);
+  font-size: 0.85rem;
+}
+
+.logbook-table td.numeric {
+  text-align: right;
+}
+
+/* Highlight Row on summary */
+.total-row td {
+  border-top: 1px solid var(--border-ink);
+  border-bottom: 3px double var(--border-ink) !important;
+  font-weight: 700;
+  color: var(--accent-color);
+  background-color: rgba(251, 191, 36, 0.05);
+}
+
+/* Custom engineering layout sheet */
+.calculation-sheet {
+  background-color: var(--bg-sheet);
+  border: 1px solid var(--border-slate);
+  box-shadow: 0 0 15px rgba(74, 222, 128, 0.05);
+  position: relative;
+}
+
+.calculation-sheet::before {
+  display: none;
+}
+
+/* Form Controls */
+.drafting-input {
+  width: 100%;
+  padding: 4px 8px;
+  border: 1px solid var(--border-slate);
+  background-color: #080c14;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--text-ink);
+  box-sizing: border-box;
+  text-align: inherit;
+  transition: all 0.15s;
+}
+
+.drafting-input:focus {
+  outline: none;
+  border: 1px solid var(--border-ink);
+  box-shadow: 0 0 8px rgba(34, 197, 94, 0.3);
+  background-color: #0b111e;
+}
+
+/* Tabs */
+.drafting-tab {
+  padding: 10px 16px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--text-slate);
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.drafting-tab:hover {
+  color: var(--text-ink);
+  background-color: rgba(34, 197, 94, 0.05);
+}
+
+.drafting-tab.active {
+  color: var(--accent-color);
+  border-bottom: 2px solid var(--accent-color);
+  text-shadow: 0 0 4px rgba(251, 191, 36, 0.4);
+}
+
+/* Animate Power flow dashes in SVG lines */
+@keyframes flow-forward {
+  to {
+    stroke-dashoffset: -20;
+  }
+}
+
+@keyframes flow-reverse {
+  to {
+    stroke-dashoffset: 20;
+  }
+}
+
+.active-flow-forward {
+  stroke-dasharray: 6, 6;
+  animation: flow-forward 1.2s linear infinite;
+}
+
+.active-flow-reverse {
+  stroke-dasharray: 6, 6;
+  animation: flow-reverse 1.2s linear infinite;
+}
+
+/* Phasor Grid Styles */
+.phasor-grid-circle {
+  fill: none;
+  stroke: rgba(20, 83, 45, 0.4);
+  stroke-dasharray: 2, 2;
+}
+
+.phasor-grid-axis {
+  stroke: rgba(20, 83, 45, 0.3);
+  stroke-width: 0.5;
+}
