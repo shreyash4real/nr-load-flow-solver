@@ -149,6 +149,17 @@ npx tsx test-solver.ts
 
 ---
 
+## 💖 Special Thanks
+
+- **Claude & Antigravity** — math auditing & deployment.
+- **GitHub CLI (`gh`)** — fast terminal setup & workflow dispatches.
+- **Apple MacBooks** — silent compiling & solver dev.
+- **Monster Energy (Lando Norris Edition)** — high-octane coding speed.
+- **Hadi Saadat, Stagg, and El-Abiad** — textbook power flow benchmarks.
+
+---
+
 ## 📄 License
 
 This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
+
